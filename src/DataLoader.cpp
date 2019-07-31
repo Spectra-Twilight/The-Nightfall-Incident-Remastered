@@ -151,15 +151,17 @@ void DataLoader::close()
 
 const string& DataLoader::getAttributeValue(const string& attribute) const
 {
-    list<Data>::const_iterator iter = currentData.begin();
-
-    while (iter->attribute != attribute && iter != currentData.end())
-        iter++;
-
-    if (iter->attribute == attribute)
-        return iter->value;
-    else
+    if (attribute.length() == 0)
         return error;
+
+    list<Data>::const_iterator iter;
+    for (iter = currentData.begin(); iter != currentData.end(); iter++)
+    {
+        if (iter->attribute == attribute)
+            return iter->value;
+    }
+    
+    return error;
 }
 
 //=========================================================================================================================================
@@ -212,8 +214,7 @@ bool DataLoader::loadNext()
     {
         if (isValidData(currentLine))
         {
-            Data newData;
-            currentData.push_back(newData);
+            currentData.push_back(Data());
             getDataSubstring(currentLine, currentData.back().attribute, '[', ']');
             getDataSubstring(currentLine, currentData.back().value, '"', '"');
             LOG(Log::Level::DEBUG) << "\t[" << currentData.back().attribute << "]: \"" << currentData.back().value << "\"";
