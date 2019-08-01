@@ -8,17 +8,18 @@
 #include <SFML/Graphics.hpp>
 
 #include <Spybot/DataLoader.hpp>
+#include <Spybot/Program.hpp>
 
 namespace Spybot
 {
-    class Program_Factory
+    class Program::Factory
     {   //=======================================================================================================================
         private:
         // Placeholder data, in the case that externally provided data is invalid.
         static std::string error_name;
         static std::string error_description;
-        const static uint8_t error_maxSize = 1;
-        const static uint8_t error_moveSpeed = 0;
+        constexpr static uint8_t error_maxSize = 1;
+        constexpr static uint8_t error_moveSpeed = 0;
         static std::string error_icon;
         static sf::Color error_color;
 
@@ -39,12 +40,12 @@ namespace Spybot
         //=======================================================================================================================
         public:
         /*-----------------------------------------------------------------------------------------------------------------------
-            Constructs a Program_Factory with no defined attributes.
+            Constructs a Program Factory with no defined attributes.
         */
-        inline Program_Factory() {}
+        inline Factory() {}
 
         /*-----------------------------------------------------------------------------------------------------------------------
-            Constructs a Program_Factory defined by the attributes stored within 
+            Constructs a Program Factory defined by the attributes stored within 
             the provided DataLoader at the time of the call to this constructor.
 
             If the required attributes are not currently available from the DataLoader,
@@ -53,7 +54,7 @@ namespace Spybot
             Parameter:
             *   loader: DataLoader with attributes for defining Programs currently loaded.
         */
-        inline Program_Factory(const DataLoader& loader) { define(loader); }
+        inline Factory(const DataLoader& loader) { define(loader); }
 
         /*-----------------------------------------------------------------------------------------------------------------------
             Defines the attributes of this Program_Factory using the attributes 
@@ -80,15 +81,15 @@ namespace Spybot
         inline const sf::Color& getColor() const { return color; }
         //-----------------------------------------------------------------------------------------------------------------------
         // Setter Methods
-        inline void setName(const std::string& newName) { name = newName; }
-        inline void setDescription(const std::string& newDesc) { description = newDesc; }
+        // inline void setName(const std::string& newName) { name = newName; }
+        // inline void setDescription(const std::string& newDesc) { description = newDesc; }
 
-        inline void setMaxSize(uint8_t newSize) { maxSize = newSize; }
-        inline void setMoveSpeed(uint8_t newSpeed) { moveSpeed = newSpeed; }
-        inline void addCommand(const std::string& newCommand) { commands.push_back(newCommand); }
+        // inline void setMaxSize(uint8_t newSize) { maxSize = newSize; }
+        // inline void setMoveSpeed(uint8_t newSpeed) { moveSpeed = newSpeed; }
+        // inline void addCommand(const std::string& newCommand) { commands.push_back(newCommand); }
 
-        inline bool loadIcon(const std::string& iconFilepath) { return icon.loadFromFile(iconFilepath); }
-        inline void setColor(const sf::Color& newPrimaryColor) { color = newPrimaryColor; }
+        // inline bool loadIcon(const std::string& iconFilepath) { return icon.loadFromFile(iconFilepath); }
+        // inline void setColor(const sf::Color& newPrimaryColor) { color = newPrimaryColor; }
         //-----------------------------------------------------------------------------------------------------------------------
     };  //=======================================================================================================================
 }
