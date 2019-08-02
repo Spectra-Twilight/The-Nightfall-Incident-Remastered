@@ -5,10 +5,10 @@
 using namespace std;
 using namespace Spybot;
 
-string Program::Factory::error_name = "Name not found.";
-string Program::Factory::error_description = "Description not found.";
-string Program::Factory::error_icon = "data/gfx/icons/error.png";
-sf::Color Program::Factory::error_color = sf::Color::White;
+const string Program::Factory::error_name = "Name not found.";
+const string Program::Factory::error_description = "Description not found.";
+const string Program::Factory::error_icon = "data/gfx/icons/error.png";
+const sf::Color Program::Factory::error_color = sf::Color::White;
 
 void Program::Factory::define(const DataLoader& loader)
 {
@@ -49,7 +49,7 @@ void Program::Factory::define(const DataLoader& loader)
         {
             stream >> tempStr;
             if (tempStr.length() > 0)
-                commands.push_back(tempStr);
+                commandIDs.push_back(tempStr);
         }
     }
 

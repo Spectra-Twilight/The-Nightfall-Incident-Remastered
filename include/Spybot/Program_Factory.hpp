@@ -16,12 +16,12 @@ namespace Spybot
     {   //=======================================================================================================================
         private:
         // Placeholder data, in the case that externally provided data is invalid.
-        static std::string error_name;
-        static std::string error_description;
+        const static std::string error_name;
+        const static std::string error_description;
         constexpr static uint8_t error_maxSize = 1;
         constexpr static uint8_t error_moveSpeed = 0;
-        static std::string error_icon;
-        static sf::Color error_color;
+        const static std::string error_icon;
+        const static sf::Color error_color;
 
         //-----------------------------------------------------------------------------------------------------------------------
         // Identifying information.
@@ -31,7 +31,8 @@ namespace Spybot
         // Statistics
         uint8_t maxSize;
         uint8_t moveSpeed;
-        std::list<std::string> commands;
+        std::list<std::string> commandIDs;
+        std::list<Command*> commands;
 
         // Graphics
         sf::Texture icon;
@@ -57,6 +58,14 @@ namespace Spybot
         inline Factory(const DataLoader& loader) { define(loader); }
 
         /*-----------------------------------------------------------------------------------------------------------------------
+            Adds the argument to the list of Commands available to Programs generated from this Factory.
+
+            Parameter:
+            *   newCommand: Pointer to the Command to be added.
+        */
+        inline void addCommand(Command* newCommand) { commands.push_back(newCommand); }
+
+        /*-----------------------------------------------------------------------------------------------------------------------
             Defines the attributes of this Program_Factory using the attributes 
             stored within the provided DataLoader at the time of the call.
 
@@ -75,7 +84,8 @@ namespace Spybot
 
         inline uint8_t getMaxSize() const { return maxSize; }
         inline uint8_t getMoveSpeed() const { return moveSpeed; }
-        inline const std::list<std::string>& getCommands() const { return commands; }
+        inline const std::list<std::string>& getCommandIDs() const { return commandIDs; }
+        inline const std::list<Command*>& getCommands() const { return commands; }
 
         inline const sf::Texture& getIcon() const { return icon; }
         inline const sf::Color& getColor() const { return color; }
