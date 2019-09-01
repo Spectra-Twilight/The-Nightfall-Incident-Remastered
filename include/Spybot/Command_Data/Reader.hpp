@@ -28,6 +28,9 @@ namespace Spybot
             not open or if the stream is empty), then this function returns false and the arguments 
             are not modified.
 
+            After a call to this function, regardless of the outcome, this object will continue to point 
+            at the same data element (as in: a successful read will not advance the data pointer).
+
             Parameters:
             *   destID: A reference to a string in which the ID of the data currently pointed to will be stored.
             *   destData: A reference to a Command object in which the attributes of the data currently pointed to will be stored.
