@@ -26,11 +26,10 @@ namespace Spybot
             *   Name (null-terminated)
             *   Description (null-terminated)
             *   Effect (Number of bytes determined by EffectBytes)
-            * *     0: Damage
-            * *     1: Growth
-            * *     2: MaxSizeUp
-            * *     3: MaxSpeedUp
-            * *     4: MaxSpeedDown
+            * *     0: ModifySize
+            * *     1: ModifyMaxSize
+            * *     2: ModifySpeed
+            * *     3: ModifySector
             *   Strength (Number of bytes determined by StrengthBytes)
             *   Range (Number of bytes determined by RangeBytes)
         */

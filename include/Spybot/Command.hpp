@@ -26,11 +26,10 @@ namespace Spybot
         */
         enum class Effect
         {
-            Damage, // Subtracts existing Sectors from the target program, potentially deleting it.
-            Growth, // Adds Sectors to the target program, but not exceeding its maximum size.
-            MaxSizeUp, // Increases the maximum (though not the current) size of the target program.
-            MaxSpeedUp, // Increases the maximum speed of the target program.
-            MaxSpeedDown // Decreases the maximum speed of the target program.
+            ModifySize, // Increases (grow) or decreases (damage) a program's current size. Current size may not exceed max.
+            ModifyMaxSize,  // Increases or decreases a program's maximum size. Does not affect current size.
+            ModifySpeed, // Increases or decreases a program's speed.
+            ModifySector // Adds or removes Sectors from the Grid.
         };
 
         //=================================================================================================================================================
@@ -40,7 +39,7 @@ namespace Spybot
         std::string description;
 
         Effect effect; // What effect does this Command have on its target?
-        uint8_t strength; // How strong is this Command's effect?
+        int8_t strength; // How strong is this Command's effect? Negative values permitted to apply a negative effect.
         uint8_t range; // How many Sectors does this Command reach from its origin point?
 
         //=================================================================================================================================================
@@ -49,7 +48,7 @@ namespace Spybot
         /*-------------------------------------------------------------------------------------------------------------------------------------------------
             Default constructor.
         */
-        inline Command(): effect(Effect::Damage), strength(0), range(1) {}
+        inline Command(): effect(Effect::ModifySize), strength(0), range(1) {}
 
         /*-------------------------------------------------------------------------------------------------------------------------------------------------
             Retrieves this object's description.
@@ -77,7 +76,7 @@ namespace Spybot
 
             Returns: The value of the strength of this object's effect.
         */
-        inline uint8_t getStrength() const { return strength; }
+        inline int8_t getStrength() const { return strength; }
         
         /*-------------------------------------------------------------------------------------------------------------------------------------------------
             Retrieves this object's effect's range.
@@ -116,7 +115,7 @@ namespace Spybot
             Parameter:
             *   newStr: The new strength value for this object's effect.
         */
-        inline void setStrength(uint8_t newStr) { strength = newStr; }
+        inline void setStrength(int8_t newStr) { strength = newStr; }
         
         /*-------------------------------------------------------------------------------------------------------------------------------------------------
             Sets the range of this object's effect.
