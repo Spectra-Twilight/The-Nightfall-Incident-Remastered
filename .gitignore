@@ -1,0 +1,19 @@
+# Ignore VSCode Metadata.
+.vscode/
+
+# Ignore log files.
+log/
+
+# Ignore automatically generated .mk files.
+make/
+
+# Ignore object files.
+obj/
+
+# Ignore executable binaries.
+Spybot-dbg.exe
+Spybot.exe
+Spybot-Editor.exe
+
+# Ignore icon image, for now.
+Spybot.ico

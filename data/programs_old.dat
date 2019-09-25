@@ -1,0 +1,21 @@
+"hack1"
+{
+    [name]: "Hack"
+    [desc]: "A simple attack program"
+    [move]: "2"
+    [size]: "4"
+    [commands]: "slice"
+    [icon]: "data/gfx/icons/hack1.png"
+    [color]: "0 199 252"
+}
+
+"slingshot"
+{
+    [name]: "Slingshot"
+    [desc]: "A simple ranged attack program"
+    [move]: "2"
+    [size]: "2"
+    [commands]: ""
+    [icon]: "data/gfx/icons/slingshot.png"
+    [color]: "0 217 165"
+}
