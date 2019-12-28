@@ -1,9 +1,9 @@
-#include <Spybot/Button.hpp>
+#include <Nightfall/Button.hpp>
 
 #include <cassert>
 
 using namespace std;
-using namespace Spybot;
+using namespace nf;
 
 //==============================================================================================================================================================
 

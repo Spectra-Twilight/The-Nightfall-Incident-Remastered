@@ -6,10 +6,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include <Spybot/Game.hpp>
+#include <Nightfall/Game.hpp>
 
 using namespace std;
-using namespace Spybot;
+using namespace nf;
 
 int main()
 {

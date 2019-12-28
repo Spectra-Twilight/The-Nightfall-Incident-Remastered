@@ -1,8 +1,8 @@
-#include <Spybot/Program.hpp>
-#include <Spybot/Program_Factory.hpp>
+#include <Nightfall/Program.hpp>
+#include <Nightfall/Program_Factory.hpp>
 
 using namespace std;
-using namespace Spybot;
+using namespace nf;
 
 //======================================================================================================================================================
 
@@ -16,7 +16,8 @@ Program::Program(const Factory* baseProgram): factory(baseProgram)
     maxSize = factory->getMaxSize();
     speed = factory->getMoveSpeed();
 
-    icon.setTexture(factory->getIcon());
+//  TODO
+//    icon.setTexture(factory->getIcon());
 }
 
 //======================================================================================================================================================
