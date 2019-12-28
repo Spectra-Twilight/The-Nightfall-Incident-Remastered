@@ -1,18 +1,18 @@
-#ifndef SPYBOT_GAME_HPP
-#define SPYBOT_GAME_HPP
+#ifndef NIGHTFALL_GAME_HPP
+#define NIGHTFALL_GAME_HPP
 
 #include <memory>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <Spybot/Command.hpp>
-#include <Spybot/Level.hpp>
-#include <Spybot/Program_Factory.hpp>
+#include <Nightfall/Command.hpp>
+#include <Nightfall/Level.hpp>
+#include <Nightfall/Program_Factory.hpp>
 
 #include <Trie/trie.hpp>
 
-namespace Spybot
+namespace nf
 {
     class Game: public sf::Drawable
     {   //============================================================================================================================================
@@ -70,4 +70,4 @@ namespace Spybot
     };  //============================================================================================================================================
 }
 
-#endif // SPYBOT_GAME_HPP
+#endif // NIGHTFALL_GAME_HPP

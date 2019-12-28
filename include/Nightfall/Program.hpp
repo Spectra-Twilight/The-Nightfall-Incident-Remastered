@@ -1,5 +1,5 @@
-#ifndef SPYBOT_PROGRAM_HPP
-#define SPYBOT_PROGRAM_HPP
+#ifndef NIGHTFALL_PROGRAM_HPP
+#define NIGHTFALL_PROGRAM_HPP
 
 #include <list>
 #include <memory>
@@ -7,12 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <Spybot/Command.hpp>
-#include <Spybot/GridSector.hpp>
+#include <Nightfall/Command.hpp>
+#include <Nightfall/GridSector.hpp>
 
 #include <Trie/trie.hpp>
 
-namespace Spybot
+namespace nf
 {
     class GridSector;
 
@@ -208,4 +208,4 @@ namespace Spybot
     };  //============================================================================================================================================
 }
 
-#endif // SPYBOT_PROGRAM_HPP
+#endif // NIGHTFALL_PROGRAM_HPP

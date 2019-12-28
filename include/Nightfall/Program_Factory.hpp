@@ -1,5 +1,5 @@
-#ifndef SPYBOT_PROGRAM_FACTORY_HPP
-#define SPYBOT_PROGRAM_FACTORY_HPP
+#ifndef NIGHTFALL_PROGRAM_FACTORY_HPP
+#define NIGHTFALL_PROGRAM_FACTORY_HPP
 
 #include <cstdint>
 #include <list>
@@ -7,19 +7,19 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <Spybot/Program.hpp>
+#include <Nightfall/Program.hpp>
 
-namespace Spybot
+namespace nf
 {
     class Program::Factory
     {   //=======================================================================================================================
         public:
         class Data // Contains classes for reading, writing, and modifying Program::Factory data.
         {
-            class Interface; // Spybot/Data/Program_Factory_Data/Interface.hpp
-            class Reader; // Spybot/Data/Program_Factory_Data/Reader.hpp
-            class Writer; // Spybot/Data/Program_Factory_Data/Writer.hpp
-            class Editor; // Spybot/Data/Program_Factory_Data/Editor.hpp
+            class Interface; // Nightfall/Data/Program_Factory_Data/Interface.hpp
+            class Reader; // Nightfall/Data/Program_Factory_Data/Reader.hpp
+            class Writer; // Nightfall/Data/Program_Factory_Data/Writer.hpp
+            class Editor; // Nightfall/Data/Program_Factory_Data/Editor.hpp
         };
 
         //=======================================================================================================================
@@ -174,4 +174,4 @@ namespace Spybot
     };  //=======================================================================================================================
 }
 
-#endif // SPYBOT_PROGRAM_FACTORY_HPP
+#endif // NIGHTFALL_PROGRAM_FACTORY_HPP

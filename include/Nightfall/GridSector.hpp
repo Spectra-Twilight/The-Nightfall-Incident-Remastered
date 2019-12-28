@@ -1,13 +1,13 @@
-#ifndef SPYBOT_GRID_SECTOR_HPP
-#define SPYBOT_GRID_SECTOR_HPP
+#ifndef NIGHTFALL_GRID_SECTOR_HPP
+#define NIGHTFALL_GRID_SECTOR_HPP
 
 #include <string>
 
 #include <SFML/Graphics.hpp>
 
-#include <Spybot/Program.hpp>
+#include <Nightfall/Program.hpp>
 
-namespace Spybot
+namespace nf
 {
     class Program;
 
@@ -191,4 +191,4 @@ namespace Spybot
     };  //======================================================================================================================================
 }
 
-#endif // SPYBOT_GRID_SECTOR_HPP
+#endif // NIGHTFALL_GRID_SECTOR_HPP

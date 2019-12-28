@@ -6,10 +6,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
-#include <Spybot/Game.hpp>
+#include <Nightfall/Game.hpp>
 
 using namespace std;
-using namespace Spybot;
+using namespace nf;
 
 int main()
 {
@@ -22,7 +22,7 @@ int main()
     testFont.loadFromFile("data/font/Spybot-bold-8.bdf");
     sf::Text testText("SHOW PROGRAMS", testFont, 8);
     
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Spybot: The Nightfall Incident", sf::Style::Titlebar | sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "The Nightfall Incident", sf::Style::Titlebar | sf::Style::Close);
     // window.setVerticalSyncEnabled(true);
 
     while (window.isOpen())

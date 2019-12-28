@@ -4,9 +4,7 @@ obj/Grid.o \
 obj/GridSector.o \
 obj/Level.o \
 obj/Main.o \
-obj/Program.o \
-obj/Program_Factory_Data/Reader.o \
-obj/Program_Factory_Data/Writer.o
+obj/Program.o
 endef
 
 gameDbgObj = $(gameRlsObj:.o=-dbg.o)
@@ -28,31 +26,31 @@ linkSFML = -DSFML_STATIC -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lope
 # Defines standard directories for headers and libraries.
 standard = -I'include/' -L'lib/' -std=c++17
 
-compileFlags = $(standard) $(linkLog) $(linkSFML)
+cxxFlags = $(standard) $(linkLog) $(linkSFML)
 
 rls: release
-release: Spybot.exe
+release: Nightfall.exe
 dbg: debug
-debug: Spybot-dbg.exe
+debug: Nightfall-dbg.exe
 edit: editor
-editor: Spybot-Editor.exe
+editor: Nightfall-Editor.exe
 
 include $(mkFiles)
 
-Spybot.exe: $(gameRlsObj)
-	g++ $(gameRlsObj) -o $@ $(compileFlags)
+Nightfall.exe: $(gameRlsObj)
+	g++ $^ -o $@ $(cxxFlags)
 
-Spybot-dbg.exe: $(gameDbgObj)
-	g++ -g $(gameDbgObj) -o $@ $(compileFlags)
+Nightfall-dbg.exe: $(gameDbgObj)
+	g++ -g $^ -o $@ $(cxxFlags)
 
-Spybot-Editor.exe: $(editorObj)
-	g++ $(editorObj) -o $@ $(compileFlags)
+Nightfall-Editor.exe: $(editorObj)
+	g++ $^ -o $@ $(cxxFlags)
 
 obj/%.o: src/%.cpp
-	g++ -c $< -o $@ $(compileFlags)
+	g++ -c $< -o $@ $(cxxFlags)
 
 obj/%-dbg.o: src/%.cpp
-	g++ -g -c $< -o $@ $(compileFlags)
+	g++ -g -c $< -o $@ $(cxxFlags)
 
 make/%.mk: src/%.cpp
 	@set -e; rm -f $@; \
@@ -61,7 +59,7 @@ make/%.mk: src/%.cpp
 	rm -f $@.temp
 
 clean:
-	rm -f Spybot.exe
-	rm -f Spybot-dbg.exe
-	rm -f Spybot-Editor.exe
+	rm -f Nightfall.exe
+	rm -f Nightfall-dbg.exe
+	rm -f Nightfall-Editor.exe
 	rm -f obj/*.o

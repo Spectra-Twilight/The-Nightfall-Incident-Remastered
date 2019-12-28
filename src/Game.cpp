@@ -1,7 +1,7 @@
-#include <Spybot/Game.hpp>
+#include <Nightfall/Game.hpp>
 
 using namespace std;
-using namespace Spybot;
+using namespace nf;
 
 //============================================================================================================================================================
 

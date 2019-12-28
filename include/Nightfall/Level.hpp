@@ -1,12 +1,12 @@
-#ifndef SPYBOT_LEVEL_HPP
-#define SPYBOT_LEVEL_HPP
+#ifndef NIGHTFALL_LEVEL_HPP
+#define NIGHTFALL_LEVEL_HPP
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <Spybot/Grid.hpp>
+#include <Nightfall/Grid.hpp>
 
-namespace Spybot
+namespace nf
 {
     class Level: public sf::Drawable
     {   //=====================================================================================================================================================
@@ -49,4 +49,4 @@ namespace Spybot
     };  //=====================================================================================================================================================
 }
 
-#endif // SPYBOT_LEVEL_HPP
+#endif // NIGHTFALL_LEVEL_HPP

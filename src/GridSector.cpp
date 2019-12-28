@@ -1,11 +1,11 @@
-#include <Spybot/GridSector.hpp>
+#include <Nightfall/GridSector.hpp>
 
 #include <stdexcept>
 
 #include <Log.hpp>
 
 using namespace std;
-using namespace Spybot;
+using namespace nf;
 
 //==================================================================================================================================================
 

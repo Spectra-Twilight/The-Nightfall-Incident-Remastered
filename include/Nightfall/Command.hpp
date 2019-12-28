@@ -1,10 +1,10 @@
-#ifndef SPYBOT_COMMAND_HPP
-#define SPYBOT_COMMAND_HPP
+#ifndef NIGHTFALL_COMMAND_HPP
+#define NIGHTFALL_COMMAND_HPP
 
 #include <cstdint>
 #include <string>
 
-namespace Spybot
+namespace nf
 {
     class Command
     {   //=================================================================================================================================================
@@ -15,10 +15,10 @@ namespace Spybot
         */
         class Data
         {
-            class Interface; // Spybot/Command_Data/Interface.hpp
-            class Reader; // Spybot/Command_Data/Reader.hpp
-            class Writer; // Spybot/Command_Data/Writer.hpp
-            class Editor; // Spybot/Command_Data/Editor.hpp
+            class Interface; // Nightfall/Command_Data/Interface.hpp
+            class Reader; // Nightfall/Command_Data/Reader.hpp
+            class Writer; // Nightfall/Command_Data/Writer.hpp
+            class Editor; // Nightfall/Command_Data/Editor.hpp
         };
 
         /*-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -128,4 +128,4 @@ namespace Spybot
     };  //=================================================================================================================================================
 }
 
-#endif // SPYBOT_COMMAND_HPP
+#endif // NIGHTFALL_COMMAND_HPP

@@ -1,5 +1,5 @@
-#ifndef SPYBOT_GRID_HPP
-#define SPYBOT_GRID_HPP
+#ifndef NIGHTFALL_GRID_HPP
+#define NIGHTFALL_GRID_HPP
 
 #include <array>
 #include <cstdint>
@@ -9,10 +9,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-#include <Spybot/GridSector.hpp>
-#include <Spybot/Program.hpp>
+#include <Nightfall/GridSector.hpp>
+#include <Nightfall/Program.hpp>
 
-namespace Spybot
+namespace nf
 {
     class Grid: public sf::Drawable
     {   //==========================================================================================================================================
@@ -113,4 +113,4 @@ namespace Spybot
     };  //==========================================================================================================================================
 }
 
-#endif // SPYBOT_GRID_HPP
+#endif // NIGHTFALL_GRID_HPP

@@ -1,10 +1,10 @@
-#ifndef SPYBOT_BUTTON_HPP
-#define SPYBOT_BUTTON_HPP
+#ifndef NIGHTFALL_BUTTON_HPP
+#define NIGHTFALL_BUTTON_HPP
 
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-namespace Spybot
+namespace nf
 {
     class Button
     {   //================================================================================================================================================
@@ -124,4 +124,4 @@ namespace Spybot
     };  //================================================================================================================================================
 }
 
-#endif // SPYBOT_BUTTON_HPP
+#endif // NIGHTFALL_BUTTON_HPP
