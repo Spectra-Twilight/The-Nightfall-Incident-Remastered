@@ -11,9 +11,9 @@ make/
 obj/
 
 # Ignore executable binaries.
-Spybot-dbg.exe
-Spybot.exe
-Spybot-Editor.exe
+Nightfall-dbg.exe
+Nightfall.exe
+Nightfall-Editor.exe
 
 # Ignore icon image, for now.
-Spybot.ico
+Nightfall.ico
