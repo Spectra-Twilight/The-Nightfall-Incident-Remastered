@@ -1,7 +1,7 @@
 #include <Nightfall/Game.hpp>
 
 using namespace std;
-using namespace nf;
+using namespace nightfall;
 
 //============================================================================================================================================================
 

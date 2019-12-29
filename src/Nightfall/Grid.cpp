@@ -1,7 +1,7 @@
 #include <Nightfall/Grid.hpp>
 
 using namespace std;
-using namespace nf;
+using namespace nightfall;
 
 //======================================================================================================================================================
 

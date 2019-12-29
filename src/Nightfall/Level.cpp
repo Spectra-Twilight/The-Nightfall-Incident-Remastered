@@ -1,7 +1,7 @@
 #include <Nightfall/Level.hpp>
 
 using namespace std;
-using namespace nf;
+using namespace nightfall;
 
 //============================================================================================================================================================
 

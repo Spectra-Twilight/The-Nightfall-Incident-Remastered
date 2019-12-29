@@ -6,7 +6,7 @@
 
 #include <Nightfall/Grid.hpp>
 
-namespace nf
+namespace nightfall
 {
     class Level: public sf::Drawable
     {   //=====================================================================================================================================================

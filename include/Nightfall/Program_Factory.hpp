@@ -9,7 +9,7 @@
 
 #include <Nightfall/Program.hpp>
 
-namespace nf
+namespace nightfall
 {
     class Program::Factory
     {   //=======================================================================================================================

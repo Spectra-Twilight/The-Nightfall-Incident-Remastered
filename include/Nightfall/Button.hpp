@@ -4,7 +4,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
-namespace nf
+namespace nightfall
 {
     class Button
     {   //================================================================================================================================================

@@ -12,7 +12,7 @@
 #include <Nightfall/GridSector.hpp>
 #include <Nightfall/Program.hpp>
 
-namespace nf
+namespace nightfall
 {
     class Grid: public sf::Drawable
     {   //==========================================================================================================================================
