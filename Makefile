@@ -55,8 +55,8 @@ obj/Nightfall-dbg/%-dbg.o: src/Nightfall/%.cpp obj/Nightfall-dbg/dummy
 
 make/Nightfall/%.mk: src/Nightfall/%.cpp make/Nightfall/dummy
 	@set -e; rm -f $@; \
-	g++ -MM $(stdDir) $< > $@.temp; \
-	sed 's,\($*\)\.o[ :]*,obj/\1.o obj/\1-dbg.o $@: ,g' < $@.temp > $@; \
+	g++ -MM $(standard) $< > $@.temp; \
+	sed 's,\($*\)\.o[ :]*,obj/Nightfall/\1.o obj/Nightfall-dbg/\1-dbg.o $@: ,g' < $@.temp > $@; \
 	rm -f $@.temp
 
 # The dummy pattern will ensure the creation of a 
