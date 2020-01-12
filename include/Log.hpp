@@ -25,7 +25,7 @@
 /// Convenience macro which checks if the log should be written before calling get().
 ////////////////////////////////////////////////////////////////////////////////
 #define LOG(level) \
-if (!(NOLOG) && Log::is_open() && level <= Log::get_report_level()) \
+if (!(NOLOG) && Log::is_open() && level <= Log::report_level()) \
 	Log().get(level, __FILE__, __FUNCTION__, __LINE__)
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -55,6 +55,23 @@ public:
 	/// \brief Destructs Log instance and saves its buffer to the logfile.
 	////////////////////////////////////////////////////////////////////////////
 	~Log();
+
+	////////////////////////////////////////////////////////////////////////////
+	/// \brief Enables auto-timestamping with the specified urgency threshold.
+	///
+	/// If enabled, a log message with urgency matching or exceeding the 
+	/// threshold will automatically convert the currently open log file, is any, 
+	/// to a timestamped log file, if it was not already.
+	///
+	/// This allows for the convenient saving of log files containing 
+	/// messages of interest without needing to save every log file or manually 
+	/// modify the current log file from the caller when a message of interest
+	/// is written.
+	///
+	///	\param enable Whether or not to enable auto-timestamping functionality.
+	/// \param level Message urgency threshold for timestamp-conversion.
+	////////////////////////////////////////////////////////////////////////////
+	static void auto_ts(bool enable, Log::Level level = Log::Level::warning);
 
 	////////////////////////////////////////////////////////////////////////////
 	/// \brief Closes the currently open logfile, if one exists.
@@ -88,20 +105,13 @@ public:
 	///	\return The buffered line, ready for the custom log message.
 	////////////////////////////////////////////////////////////////////////////
 	std::stringstream& get(Level msglvl, const char* file, const char* function, uint32_t line);
-
-	////////////////////////////////////////////////////////////////////////////
-	///	\brief Returns the current maximum report level for the Log.
-	///
-	///	\return The Log's current maximum reporting level.
-	////////////////////////////////////////////////////////////////////////////
-	inline static Level get_report_level() { return report_level; }
 	
 	////////////////////////////////////////////////////////////////////////////
 	/// \brief Checks if the Log currently has a logfile open.
 	///
 	///	\return True if a logfile is open, or false otherwise.
 	////////////////////////////////////////////////////////////////////////////
-	inline static bool is_open() { return logfile.is_open(); }
+	static bool is_open();
 
 	////////////////////////////////////////////////////////////////////////////
 	/// \brief Opens a new logfile without a timestamp.
@@ -145,11 +155,34 @@ public:
 	static bool open_ts(const std::string& directory, const std::string& filename, Level max_report_level);
 
 	////////////////////////////////////////////////////////////////////////////
+	/// \brief Converts the currently open log file into a timestamped log file.
+	///
+	/// If no log file is open at the time that this function is called, then 
+	/// this function does nothing and returns false.
+	///
+	/// If the currently open log file is already timestamped when this function 
+	/// is called, then this function does nothing and returns true.
+	///
+	/// Note: If this function returns false for any reason, then the log file 
+	/// open at the time of the call, if any, will no longer be open.
+	///
+	/// \return True if the log file is now timestamped, or false if the conversion failed.
+	////////////////////////////////////////////////////////////////////////////
+	static bool timestamp();
+
+	////////////////////////////////////////////////////////////////////////////
+	///	\brief Returns the current maximum report level for the Log.
+	///
+	///	\return The Log's current maximum reporting level.
+	////////////////////////////////////////////////////////////////////////////
+	static Level report_level();
+
+	////////////////////////////////////////////////////////////////////////////
 	/// \brief Sets the reporting level to the value of new_report_level.
 	///
 	///	\param new_report_level The new maximum report level.
 	////////////////////////////////////////////////////////////////////////////
-	inline static void set_report_level(Level new_report_level) { report_level = new_report_level; }
+	static void report_level(Level new_report_level);
 
 private:
 	////////////////////////////////////////////////////////////////////////////
@@ -200,10 +233,16 @@ private:
 	////////////////////////////////////////////////////////////////////////////
 	///	Member Data
 	////////////////////////////////////////////////////////////////////////////
-	static const std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> start_time; ///< The time in which the program began running.
-	static Level report_level; ///< Minimum urgency log types to write to the logfile.
-	static std::ofstream logfile; ///< Program-wide logfile.
-	std::stringstream msgbuf; ///< Instance-specific message buffer that moves to the logfile upon completion.
+	static const std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds> _start_time; ///< The time in which the program began running.
+	static Level _report_level; ///< Minimum urgency log types to write to the logfile.
+	static std::ofstream _logfile; ///< Program-wide logfile.
+	std::stringstream _msgbuf; ///< Instance-specific message buffer that moves to the logfile upon completion.
+
+	static std::string _filepath; ///< A copy of the filepath used to open the current log file, in case a non-timestamped file must become timestamped.
+	static bool _timestamped; ///< Whether or not the current log file is a timestamped log file.
+
+	static bool _auto_ts; ///< Whether or not to allow for automatic timestamp conversion.
+	static Log::Level _auto_ts_threshold; ///< Minimum urgency to convert a non-timestamped log file to a timestamped log file.
 };
 
 #endif // LOG_HPP
