@@ -1,8 +1,12 @@
-#include <Nightfall/Sector.hpp>
-
-#include <stdexcept>
-
+////////////////////////////////////////////////////////////////////////////////
+/// Log Include
+////////////////////////////////////////////////////////////////////////////////
 #include <Log.hpp>
+
+////////////////////////////////////////////////////////////////////////////////
+/// Nightfall Includes
+////////////////////////////////////////////////////////////////////////////////
+#include <Nightfall/Sector.hpp>
 
 using namespace std;
 
@@ -82,7 +86,17 @@ namespace nightfall
     ////////////////////////////////////////////////////////////////////////////
     bool Sector::load_default_sector_gfx()
     {
-        return _default_gfx.loadFromFile(_default_gfx_dir);
+        bool ret_val = _default_gfx.loadFromFile(_default_gfx_dir);
+
+        if (!ret_val)
+        {
+            LOGE << "Failed to load default sector texture from " << _default_gfx_dir << '.';
+            throw logic_error("Failed to load default sector texture from " + _default_gfx_dir + '.');
+        }
+        else
+            LOGD << "Successfully loaded default sector texture from " << _default_gfx_dir << '.';
+        
+        return ret_val;
     }
 
     ////////////////////////////////////////////////////////////////////////////
