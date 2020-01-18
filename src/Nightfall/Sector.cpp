@@ -158,6 +158,13 @@ namespace nightfall
     }
 
     ////////////////////////////////////////////////////////////////////////////
+    uint8_t Sector::side_length()
+    {
+        // TODO: Multiply by global graphics scale, when implemented.
+        return _side_length;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
     sf::Vector2u Sector::size() const
     {
         sf::Vector2u size;

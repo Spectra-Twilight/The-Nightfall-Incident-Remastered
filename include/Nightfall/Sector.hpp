@@ -147,6 +147,17 @@ namespace nightfall
 		void position(float x, float y);
 
 		////////////////////////////////////////////////////////////////////////
+		/// \brief Returns the length of one side of a Sector, in pixels.
+		///
+		/// All sectors share the same base size value, and all sectors are 
+		/// squares. Therefore, the value returned by a call to this method 
+		/// will accurately reflect the length of any Sector side.
+		///
+		/// \return The length of one side of a Sector, to which all Sectors adhere to, in pixels.
+		////////////////////////////////////////////////////////////////////////
+		static uint8_t side_length();
+
+		////////////////////////////////////////////////////////////////////////
 		/// \brief Returns the size of this Sector, in pixels.
 		///
 		/// \return The size of this Sector, in pixels.
@@ -160,6 +171,7 @@ namespace nightfall
 		static constexpr uint8_t _base_side_length = 28; ///< Length of the side of a Sector, in pixels, at x1 scale.
 		static constexpr float _link_scale = 1.0f / 3.0f; ///< Size of a link sprite relative to standard sector sprite size.
 		static constexpr int8_t _program_pos_offset = -1; ///< Offset, in pixels, for the x and y coordinates of the graphics of a program occupying this Sector.
+		static constexpr uint8_t _side_length = 28; ///< Length of one side of a Sector, measured in pixels.
 		static const sf::Color _color; ///< Color of a sector.
 		static const std::string _default_gfx_dir; ///< Directory of the default sector texture.
 
