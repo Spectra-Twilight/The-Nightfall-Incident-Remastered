@@ -31,42 +31,6 @@ namespace nightfall
 		Sector(const sf::Texture& texture, bool active = true);
 
 		////////////////////////////////////////////////////////////////////////
-		/// \brief Draws the Sector to the specified RenderTarget.
-		///
-		///	\param target Render target to draw to.
-		/// \param states Current render states.
-		////////////////////////////////////////////////////////////////////////
-		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
-		////////////////////////////////////////////////////////////////////////
-		/// \brief Returns a pointer to the program occupying this Sector, if any.
-		///
-		/// If no Program is occupying this Sector when this function is called, 
-		/// then this function will return a nullptr.
-		///
-		/// \return The Program occupying this Sector, or nullptr.
-		////////////////////////////////////////////////////////////////////////
-		const Program* occupant() const;
-
-		////////////////////////////////////////////////////////////////////////
-		/// \brief Returns the position of this Sector.
-		///
-		/// The returned position is representative of the offset of the 
-		/// top-leftmost pixel of this Sector from the top-leftmost pixel of 
-		/// a RenderTarget.
-		///
-		/// \return The position of this Sector.
-		////////////////////////////////////////////////////////////////////////
-		const sf::Vector2f& position() const;
-
-		////////////////////////////////////////////////////////////////////////
-		/// \brief Returns the length, in pixels, of one side of a Sector.
-		///
-		/// \return The length, in pixels, of one side of a sector.
-		////////////////////////////////////////////////////////////////////////
-		static uint16_t side_length() const;
-
-		////////////////////////////////////////////////////////////////////////
 		/// \brief Returns whether or not this Sector is currently active.
 		///
 		/// An active sector has its sector graphic drawn (if unoccupied), and 
@@ -76,18 +40,6 @@ namespace nightfall
 		/// \return True if this Sector is active, or false otherwise.
 		////////////////////////////////////////////////////////////////////////
 		bool active() const;
-
-		////////////////////////////////////////////////////////////////////////
-		/// \brief Loads the default sector texture into memory.
-		///
-		/// The path of the graphic is hard-coded. This function exists to 
-		/// provide control of when that graphic is loaded into memory.
-		///
-		/// This function should be called before any Sectors are created.
-		///
-		/// \return True if the texture was successfully loaded, or false otherwise.
-		////////////////////////////////////////////////////////////////////////
-		static bool load_default_sector_gfx();
 
 		////////////////////////////////////////////////////////////////////////
 		/// \brief Sets the active state of the Sector.
@@ -100,6 +52,14 @@ namespace nightfall
 		///		True indicates being active. False indicates being inactive.
 		////////////////////////////////////////////////////////////////////////
 		void active(bool active);
+
+		////////////////////////////////////////////////////////////////////////
+		/// \brief Draws the Sector to the specified RenderTarget.
+		///
+		///	\param target Render target to draw to.
+		/// \param states Current render states.
+		////////////////////////////////////////////////////////////////////////
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 		////////////////////////////////////////////////////////////////////////
 		/// \brief Sets whether a link from this Sector to the Sector below is drawn.
@@ -124,15 +84,46 @@ namespace nightfall
 		void link_right(bool link_right);
 
 		////////////////////////////////////////////////////////////////////////
-		/// \brief Moves the Sector to the new position.
+		/// \brief Loads the default sector texture into memory.
 		///
-		/// The provided coordinates represent the offset of the top-leftmost 
-		/// pixel of the Sector from the top-leftmost pixel of the RenderTarget.
+		/// The path of the graphic is hard-coded. This function exists to 
+		/// provide control of when that graphic is loaded into memory.
 		///
-		/// \param x The offset, in pixels, from the left edge of the RenderTarget.
-		/// \param y The offset, in pixels, from the top edge of the RenderTarget.
+		/// This function should be called before any Sectors are created.
+		///
+		/// \return True if the texture was successfully loaded, or false otherwise.
 		////////////////////////////////////////////////////////////////////////
-		void position(float x, float y);
+		static bool load_default_sector_gfx();
+
+		////////////////////////////////////////////////////////////////////////
+		/// \brief Returns a pointer to the program occupying this Sector, if any.
+		///
+		/// If no Program is occupying this Sector when this function is called, 
+		/// then this function will return a nullptr.
+		///
+		/// \return The Program occupying this Sector, or nullptr.
+		////////////////////////////////////////////////////////////////////////
+		const Program* occupant() const;
+
+		////////////////////////////////////////////////////////////////////////
+		/// \brief Assigns a new occupant Program to this Sector.
+		///
+		/// An argument of nullptr will clear any occupant from the Sector.
+		///
+		/// \param occupant The new Program occupying the Sector, or nullptr.
+		////////////////////////////////////////////////////////////////////////
+		void occupant(const Program* occupant);
+
+		////////////////////////////////////////////////////////////////////////
+		/// \brief Returns the position of this Sector.
+		///
+		/// The returned position is representative of the offset of the 
+		/// top-leftmost pixel of this Sector from the top-leftmost pixel of 
+		/// a RenderTarget.
+		///
+		/// \return The position of this Sector.
+		////////////////////////////////////////////////////////////////////////
+		const sf::Vector2f& position() const;
 
 		////////////////////////////////////////////////////////////////////////
 		/// \brief Moves the Sector to the new position.
@@ -145,44 +136,54 @@ namespace nightfall
 		void position(const sf::Vector2f& pos);
 
 		////////////////////////////////////////////////////////////////////////
-		/// \brief Assigns a new occupant Program to this Sector.
+		/// \brief Moves the Sector to the new position.
 		///
-		/// An argument of nullptr will clear any occupant from the Sector.
+		/// The provided coordinates represent the offset of the top-leftmost 
+		/// pixel of the Sector from the top-leftmost pixel of the RenderTarget.
 		///
-		/// \param occupant The new Program occupying the Sector, or nullptr.
+		/// \param x The offset, in pixels, from the left edge of the RenderTarget.
+		/// \param y The offset, in pixels, from the top edge of the RenderTarget.
 		////////////////////////////////////////////////////////////////////////
-		void occupant(const Program* occupant);
+		void position(float x, float y);
+
+		////////////////////////////////////////////////////////////////////////
+		/// \brief Returns the size of this Sector, in pixels.
+		///
+		/// \return The size of this Sector, in pixels.
+		////////////////////////////////////////////////////////////////////////
+		sf::Vector2u size() const;
 	
 	private:
 		////////////////////////////////////////////////////////////////////////
-		/// Graphical Constants
+		/// Constant Data
 		////////////////////////////////////////////////////////////////////////
 		static constexpr uint8_t _base_side_length = 28; ///< Length of the side of a Sector, in pixels, at x1 scale.
-		static constexpr sf:Color _color; ///< Color of a sector.
-		static constexpr _link_scale = 1.0f / 3.0f ///< Size of a link sprite relative to standard sector sprite size.
+		static constexpr float _link_scale = 1.0f / 3.0f; ///< Size of a link sprite relative to standard sector sprite size.
+		static constexpr int8_t _program_pos_offset = -1; ///< Offset, in pixels, for the x and y coordinates of the graphics of a program occupying this Sector.
+		static const sf::Color _color; ///< Color of a sector.
+		static const std::string _default_gfx_dir; ///< Directory of the default sector texture.
 
 		////////////////////////////////////////////////////////////////////////
 		/// Static Data
 		////////////////////////////////////////////////////////////////////////
-		const static std::string _default_gfx_dir; ///< Directory of the default sector texture.
 		static sf::Texture _default_gfx; ///< Default sector texture if none is specified.
-		static uint16_t side_length; ///< Length of one side of a Sector, in pixels.
+		static uint16_t _side_length; ///< Length of one side of a Sector, in pixels.
 
 		////////////////////////////////////////////////////////////////////////
 		/// Member State Data
 		////////////////////////////////////////////////////////////////////////
 		const Program* _occupant; ///< The Program currently occupying this Sector.
 		bool _active; ///< Sector is invisible and not enterable if inactive.
-		bool _link_right; ///< Should link_right_gfx be drawn?
 		bool _link_down; ///< Should link_down_gfx be drawn?
+		bool _link_right; ///< Should link_right_gfx be drawn?
 
 		////////////////////////////////////////////////////////////////////////
 		/// Member Sprites
 		////////////////////////////////////////////////////////////////////////
-		sf::Sprite sector_gfx; ///< Sector sprite when unoccupied.
-		sf::Sprite program_gfx; ///< Sector sprite when occupied.
-		sf::Sprite link_right_gfx; ///< Sprite of the link to the sector immediately right of this one. Visible if the sectors share the same program.
-		sf::Sprite link_down_gfx; ///< Sprite of the link to the sector immediately below this one. Visible if the sectors share the same program.
+		sf::Sprite _sector_gfx; ///< Sector sprite when unoccupied.
+		sf::Sprite _program_gfx; ///< Sector sprite when occupied.
+		sf::Sprite _link_right_gfx; ///< Sprite of the link to the sector immediately right of this one. Visible if the sectors share the same program.
+		sf::Sprite _link_down_gfx; ///< Sprite of the link to the sector immediately below this one. Visible if the sectors share the same program.
 	}; // class Sector
 } // namespace nightfall
 

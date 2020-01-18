@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include <Nightfall/Command.hpp>
-#include <Nightfall/GridSector.hpp>
+#include <Nightfall/Sector.hpp>
 
 #include <Trie/trie.hpp>
 
