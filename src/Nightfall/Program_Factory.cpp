@@ -1,33 +1,24 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Nightfall Includes
 ////////////////////////////////////////////////////////////////////////////////
-#include <Nightfall/Program.hpp>
 #include <Nightfall/Program_Factory.hpp>
 
 namespace nightfall
 {
     ////////////////////////////////////////////////////////////////////////////
-    Program::Program(const Factory* factory): 
-        _factory(factory),
-        _max_size(factory->max_size()),
-        _move_speed(factory->move_speed())
+    const sf::Color& Program::Factory::color() const
     {
+        return _color;
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    const Program::Factory* Program::factory() const
-    {
-        return _factory;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////
-    uint8_t Program::max_size() const
+    uint8_t Program::Factory::max_size() const
     {
         return _max_size;
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    uint8_t Program::move_speed() const
+    uint8_t Program::Factory::move_speed() const
     {
         return _move_speed;
     }

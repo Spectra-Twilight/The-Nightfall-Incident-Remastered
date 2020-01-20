@@ -24,7 +24,7 @@ namespace nightfall
 	class Program
 	{
 	public:
-		class Factory; // Program;;Factory.hpp
+		class Factory; // Program_Factory.hpp
 
 		////////////////////////////////////////////////////////////////////////
 		/// \brief Constructs a Program instance using the attributes of the provided Factory.
@@ -53,14 +53,14 @@ namespace nightfall
 		uint8_t max_size() const;
 
 		////////////////////////////////////////////////////////////////////////
-		///	\brief Return this Program's speed.
+		///	\brief Return this Program's movement speed.
 		///
 		///	The speed of a Program represents how many Sectors it is capable 
 		/// of traversing in a single turn.
 		///
-		/// \return The speed of the Program.
+		/// \return The movement speed of the Program.
 		////////////////////////////////////////////////////////////////////////
-		uint8_t speed() const;
+		uint8_t move_speed() const;
 
 	private:
 		////////////////////////////////////////////////////////////////////////
@@ -68,7 +68,7 @@ namespace nightfall
 		////////////////////////////////////////////////////////////////////////
 		const Factory* _factory; ///< The Factory from which this Program was created.
 		uint8_t _max_size; ///< The maximum number of Sectors this Program instance may support at once.
-		uint8_t _speed; ///< The maximum number of Sectors this Program may traverse in one turn.
+		uint8_t _move_speed; ///< The maximum number of Sectors this Program may traverse in one turn.
 	};
 } // namespace nightfall
 

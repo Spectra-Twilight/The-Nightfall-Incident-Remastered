@@ -1,177 +1,158 @@
 #ifndef NIGHTFALL_PROGRAM_FACTORY_HPP
 #define NIGHTFALL_PROGRAM_FACTORY_HPP
 
+////////////////////////////////////////////////////////////////////////////////
+/// Standard Library Includes
+////////////////////////////////////////////////////////////////////////////////
 #include <cstdint>
 #include <list>
 #include <string>
 
-#include <SFML/Graphics.hpp>
-
+////////////////////////////////////////////////////////////////////////////////
+/// Nightfall Includes
+////////////////////////////////////////////////////////////////////////////////
 #include <Nightfall/Program.hpp>
+
+////////////////////////////////////////////////////////////////////////////////
+/// SFML Includes
+////////////////////////////////////////////////////////////////////////////////
+#include <SFML/Graphics.hpp>
 
 namespace nightfall
 {
+    ////////////////////////////////////////////////////////////////////////////
+    /// \brief Defines a type of Program, which can be used to create multiple Program instances.
+    ////////////////////////////////////////////////////////////////////////////
     class Program::Factory
-    {   //=======================================================================================================================
-        public:
-        class Data // Contains classes for reading, writing, and modifying Program::Factory data.
-        {
-            class Interface; // Nightfall/Data/Program_Factory_Data/Interface.hpp
-            class Reader; // Nightfall/Data/Program_Factory_Data/Reader.hpp
-            class Writer; // Nightfall/Data/Program_Factory_Data/Writer.hpp
-            class Editor; // Nightfall/Data/Program_Factory_Data/Editor.hpp
-        };
+    {   
+    public:
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Returns the RGBA color for this Program Factory.
+        ///
+        /// \return The RGBA color of this Program Factory.
+        ////////////////////////////////////////////////////////////////////////
+        const sf::Color& color() const;
 
-        //=======================================================================================================================
-        private:
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Sets the RGBA color value of this Program Factory to the argument.
+        ///
+        /// \param color The new color for this Program Factory.
+        ////////////////////////////////////////////////////////////////////////
+        void color(const sf::Color& color);
 
-        // Identifying information
-        std::string name;
-        std::string description;
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Returns the description of the Program constructed by this Factory.
+        ///
+        /// \return The description of the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        const std::string& description() const;
 
-        // Statistics
-        uint8_t maxSize;
-        uint8_t moveSpeed;
-        std::list<std::string> commandIDs;
-        std::list<Command*> commands;
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Set the description for the Program constructed by this Factory to the argument.
+        ///
+        /// \param desc The new description for the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        void description(const std::string& desc);
 
-        // Graphics
-        std::string gfxID; // Appended to graphics filepath prefix and suffix to acquire desired graphic.
-        sf::Texture gfx;
-        sf::Color color;
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Set the icon ID for the Program constructed by this Factory to the argument.
+        ///
+        /// Invoking this function will NOT load the new icon indicated by the 
+        /// new ID. In order to do so, icon_reload() should be called after this 
+        /// function returns.
+        ///
+        /// \param id The new icon ID for the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        void icon_id(const std::string& id);
+        
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Reload the icon of the Program constructed by this Factory.
+        ///
+        /// This function should be called after a new icon is set with icon_id()
+        /// or after a change in the global graphics quality in order for the 
+        /// new setting to take effect.
+        ///
+        /// The icon loaded will depend both on this Factory's internal icon_id, 
+        /// as well as the global graphics settings.
+        ///
+        /// If this function fails to load the desired icon_id, then this 
+        /// Factory's icon will be set to the global error graphic and this 
+        /// function returns false.
+        ///
+        /// \return True if the desired icon was successfully loaded, or false otherwise.
+        ////////////////////////////////////////////////////////////////////////
+        bool icon_reload();
 
-        //=======================================================================================================================
-        public:
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Returns the base maximum size of the Program constructed by this Factory.
+        ///
+        /// A Program's maximum size defines how many Sectors it may occupy 
+        /// simultaneously before it must vacate the Sector it began occupying
+        /// the least recently.
+        ///
+        /// \return The base maximum size of the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        uint8_t max_size() const;
 
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Adds the argument to the list of Commands available to Programs generated from this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Sets the base maximum size of the Program constructed by this Factory to the argument.
+        ///
+        /// A Program's maximum size defines how many Sectors it may occupy 
+        /// simultaneously before it must vacate the Sector it began occupying
+        /// the least recently.
+        ///
+        /// \param max_size The new base maximum size for the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        void max_size(uint8_t max_size);
 
-            Parameter:
-            *   newCommand: Pointer to the Command to be added.
-        */
-        inline void addCommand(Command* newCommand) { commands.push_back(newCommand); }
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Returns the base move speed of the Program constructed by this Factory.
+        ///
+        /// A Program's move speed defines the maximum number of Sectors it may 
+        /// traverse in a single turn.
+        ///
+        /// \return The base move speed of the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        uint8_t move_speed() const;
 
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Adds the ID contained within the argument string to an internal list of CommandIDs available 
-            to Programs generated from this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Sets the base move speed of the Program constructed by this Factory to the argument.
+        ///
+        /// A Program's move speed defines the maximum number of Sectors it may 
+        /// traverse in a single turn.
+        ///
+        /// \param move_speed The new base move speed of the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        void move_speed(uint8_t move_speed);
 
-            Parameter:
-            *   newCommandID: A constant reference to a string containing the new Command ID to add.
-        */
-        inline void addCommandID(const std::string& newCommandID) { commandIDs.push_back(newCommandID); }
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Returns the name of the Program constructed by this Factory.
+        ///
+        /// \return The name of the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        const std::string& name() const;
 
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns the graphical RGBA color of this object.
+        ////////////////////////////////////////////////////////////////////////
+        /// \brief Sets the name of the Program constructed by this Factory to the argument.
+        ///
+        /// \param name The new name of the Program constructed by this Factory.
+        ////////////////////////////////////////////////////////////////////////
+        void name(const std::string& name);
 
-            Returns: A constant reference to this object's sf::Color.
-        */
-        inline const sf::Color& getColor() const { return color; }
+    private:
+        ////////////////////////////////////////////////////////////////////////
+        /// Instance Members
+        ////////////////////////////////////////////////////////////////////////
+        std::string _name; ///< Name of the Program constructed by this Factory.
+        std::string _desc; ///< Description of the Program constructed by this Factory.
 
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns pointers to the Commands that this object possesses.
+        uint8_t _max_size; ///< Number of Sectors the Program can occupy at once, before modification.
+        uint8_t _move_speed; ///< Number of Sectors the Program can traverse in one turn, before modification.
 
-            Returns: A constant reference to a list of Command pointers.
-        */
-        inline const std::list<Command*>& getCommands() const { return commands; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns the IDs of the Commands that this object possesses.
-
-            Returns: A constant reference to a list of strings containing Command IDs.
-        */
-        inline const std::list<std::string>& getCommandIDs() const { return commandIDs; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns the description for this object.
-
-            Returns: A constant reference to a string containing this object's description.
-        */
-        inline const std::string& getDescription() const { return description; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns this object's currently loaded sf::Texture for its graphical icon.
-
-            Returns: A constant reference to an sf::Texture.
-        */
-        inline const sf::Texture& getGfx() const { return gfx; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns this object's ID used to locate and load its sf::Textures.
-
-            Returns: A constant reference to a string containing this object's gfxID.
-        */
-        inline const std::string& getGfxID() const { return gfxID; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns the maximum size of this object (in terms of sectors) before buffs.
-
-            Returns: The value of this object's max size.
-        */
-        inline uint8_t getMaxSize() const { return maxSize; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns the move speed of this object (in terms of sectors per turn) before buffs.
-
-            Returns: The value of this object's move speed.
-        */
-        inline uint8_t getMoveSpeed() const { return moveSpeed; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Returns the name of this object.
-
-            Returns: A constant reference to a string containing this object's name.
-        */
-        inline const std::string& getName() const { return name; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Sets this object's color to the argument color's value.
-
-            Parameters:
-            *   newColor: A constant reference to an sf::Color that will be copied to this object's color.
-        */
-        inline void setColor(const sf::Color& newColor) { color = newColor; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Sets this object's description to the argument string's value.
-
-            Parameter:
-            *   newDesc: A constant reference to a string that will be copied to this object's description attribute.
-        */
-        inline void setDescription(const std::string& newDesc) { description = newDesc; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Sets this object's graphics ID to the ID contained within the argument string.
-
-            Parameter:
-            *   newGfxID: A constant reference to a string containing the new graphics ID.
-        */
-        inline void setGfxID(const std::string& newGfxID) { gfxID = newGfxID; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Sets this object's max size (in terms of sectors) to the argument value.
-
-            Parameter:
-            *   newSize: A value to be copied to this object's max size attribute.
-        */
-        inline void setMaxSize(uint8_t newSize) { maxSize = newSize; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Sets this object's move speed (in terms of sectors per turn) to the argument value.
-
-            Parameter:
-            *   newSpeed: A value to be copied to this object's move speed attribute.
-        */
-        inline void setMoveSpeed(uint8_t newSpeed) { moveSpeed = newSpeed; }
-
-        /*-----------------------------------------------------------------------------------------------------------------------
-            Sets this object's name to the argument string's value.
-
-            Parameter:
-            *   newName: A constant reference to a string that will be copied to this object's name attribute.
-        */
-        inline void setName(const std::string& newName) { name = newName; }
-
-    };  //=======================================================================================================================
-}
+        std::string _icon_id; ///< Filename (without suffix) that identifies the Program's icon texture file.
+        sf::Texture _icon; ///< The texture for this Program type's icon.
+        sf::Color _color; ///< Color of the Program's base sprite.
+    };
+} // namespace nightfall
 
 #endif // NIGHTFALL_PROGRAM_FACTORY_HPP

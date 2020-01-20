@@ -6,7 +6,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Nightfall Includes
 ////////////////////////////////////////////////////////////////////////////////
-#include <Nightfall/Meta/Directory.hpp>
+#include <Nightfall/Util/Directory.hpp>
+#include <Nightfall/Program_Factory.hpp>
 #include <Nightfall/Sector.hpp>
 
 using namespace std;
@@ -30,14 +31,16 @@ namespace nightfall
         _sector_gfx.setTexture(texture);
         _sector_gfx.setColor(_color);
 
-        const sf::Texture& program_texture = Program::getBaseGfx();
-        _program_gfx.setTexture(program_texture);
+        // TODO: Find new home for base program texture.
 
-        _link_right_gfx.setTexture(program_texture);
-        _link_right_gfx.setScale(_link_scale, _link_scale);
+        // const sf::Texture& program_texture = Program::getBaseGfx();
+        // _program_gfx.setTexture(program_texture);
 
-        _link_down_gfx.setTexture(program_texture);
-        _link_down_gfx.setScale(_link_scale, _link_scale);
+        // _link_right_gfx.setTexture(program_texture);
+        // _link_right_gfx.setScale(_link_scale, _link_scale);
+
+        // _link_down_gfx.setTexture(program_texture);
+        // _link_down_gfx.setScale(_link_scale, _link_scale);
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -86,7 +89,7 @@ namespace nightfall
     ////////////////////////////////////////////////////////////////////////////
     bool Sector::load_default_sector_gfx()
     {
-        std::string texture_filepath = meta::Directory::gfx_sector_default();
+        std::string texture_filepath = util::Directory::gfx_sector_default();
         bool ret_val = _default_sector_texture.loadFromFile(texture_filepath);
 
         if (!ret_val)
@@ -111,7 +114,7 @@ namespace nightfall
     {
         _occupant = occupant;
 
-        const sf::Color& occupant_color = occupant->getColor();
+        const sf::Color& occupant_color = occupant->factory()->color();
         _program_gfx.setColor(occupant_color);
         _link_down_gfx.setColor(occupant_color);
         _link_right_gfx.setColor(occupant_color);
@@ -141,14 +144,14 @@ namespace nightfall
 
         // Establish position of down link.
         offset_pos = pos;
-        offset_pos.y += gfx_size.y - Program::baseGfxEdge;
-        offset_pos.x += gfx_size.x * _link_scale;
+        offset_pos.y += (gfx_size.y + _link_offset);
+        offset_pos.x += (gfx_size.x * _link_scale);
         _link_down_gfx.setPosition(offset_pos);
 
         // Establish position of right link.
         offset_pos = pos;
-        offset_pos.x += gfx_size.x - Program::baseGfxEdge;
-        offset_pos.y += gfx_size.y * _link_scale;
+        offset_pos.x += (gfx_size.x + _link_offset);
+        offset_pos.y += (gfx_size.y * _link_scale);
         _link_right_gfx.setPosition(offset_pos);
     }
 
