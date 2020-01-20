@@ -1,19 +1,19 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Nightfall Includes
 ////////////////////////////////////////////////////////////////////////////////
-#include <Nightfall/Meta/Directory.hpp>
+#include <Nightfall/Util/Directory.hpp>
 
-namespace nightfall::meta
+namespace nightfall::util
 {
     ////////////////////////////////////////////////////////////////////////////
-    constexpr std::string Directory::commands()
+    std::string Directory::commands()
     {
         return std::string(_data)
             += _commands;
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    constexpr std::string Directory::gfx_program_base()
+    std::string Directory::gfx_program_base()
     {
         return ((std::string(_data)
             += _gfx)
@@ -22,7 +22,7 @@ namespace nightfall::meta
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    constexpr std::string Directory::gfx_program_error()
+    std::string Directory::gfx_program_error()
     {
         return ((std::string(_data)
             += _gfx)
@@ -31,7 +31,7 @@ namespace nightfall::meta
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    constexpr std::string Directory::gfx_sector_default()
+    std::string Directory::gfx_sector_default()
     {
         return ((std::string(_data)
             += _gfx)
@@ -40,9 +40,9 @@ namespace nightfall::meta
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    constexpr std::string Directory::programs()
+    std::string Directory::programs()
     {
         return std::string(_data)
             += _programs;
     }
-} // namespace nightfall::meta
+} // namespace nightfall::util
