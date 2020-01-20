@@ -19,7 +19,7 @@ namespace nightfall
 		/// \param active Whether or not this Sector is active, and therefore 
 		///		visible and enterable by Programs. Defaults to true.
 		////////////////////////////////////////////////////////////////////////
-		Sector(bool active = true): Sector(_default_gfx, active) {}
+		Sector(bool active = true): Sector(_default_sector_texture, active) {}
 
 		////////////////////////////////////////////////////////////////////////
 		/// \brief Constructs a Sector using the provided texture.
@@ -168,18 +168,17 @@ namespace nightfall
 		////////////////////////////////////////////////////////////////////////
 		/// Constant Data
 		////////////////////////////////////////////////////////////////////////
-		static constexpr uint8_t _base_side_length = 28; ///< Length of the side of a Sector, in pixels, at x1 scale.
+		static constexpr int8_t _link_offset = -6; ///< Offset, in pixels, to shift the link sprite into its parent's sprite to 
 		static constexpr float _link_scale = 1.0f / 3.0f; ///< Size of a link sprite relative to standard sector sprite size.
 		static constexpr int8_t _program_pos_offset = -1; ///< Offset, in pixels, for the x and y coordinates of the graphics of a program occupying this Sector.
 		static constexpr uint8_t _side_length = 28; ///< Length of one side of a Sector, measured in pixels.
 		static const sf::Color _color; ///< Color of a sector.
-		static const std::string _default_gfx_dir; ///< Directory of the default sector texture.
 
 		////////////////////////////////////////////////////////////////////////
 		/// Static Data
 		////////////////////////////////////////////////////////////////////////
-		static sf::Texture _default_gfx; ///< Default sector texture if none is specified.
-		static uint16_t _side_length; ///< Length of one side of a Sector, in pixels.
+		static sf::Texture _default_sector_texture; ///< Default sector texture if none is specified.
+		static sf::Texture _program_texture; ///< Texture used for all Programs.
 
 		////////////////////////////////////////////////////////////////////////
 		/// Member State Data

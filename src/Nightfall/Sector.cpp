@@ -6,6 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Nightfall Includes
 ////////////////////////////////////////////////////////////////////////////////
+#include <Nightfall/Meta/Directory.hpp>
 #include <Nightfall/Sector.hpp>
 
 using namespace std;
@@ -16,9 +17,8 @@ namespace nightfall
     /// Static Member Initialization
     ////////////////////////////////////////////////////////////////////////////
     const sf::Color Sector::_color = sf::Color(255, 255, 255, 64);
-    const string Sector::_default_gfx_dir = "data/gfx/sectors/default.png";
-    sf::Texture Sector::_default_gfx;
-    uint16_t Sector::_side_length(_base_side_length);
+    sf::Texture Sector::_default_sector_texture;
+    sf::Texture Sector::_program_texture;
 
     ////////////////////////////////////////////////////////////////////////////
     Sector::Sector(const sf::Texture& texture, bool active):
@@ -86,15 +86,16 @@ namespace nightfall
     ////////////////////////////////////////////////////////////////////////////
     bool Sector::load_default_sector_gfx()
     {
-        bool ret_val = _default_gfx.loadFromFile(_default_gfx_dir);
+        std::string texture_filepath = meta::Directory::gfx_sector_default();
+        bool ret_val = _default_sector_texture.loadFromFile(texture_filepath);
 
         if (!ret_val)
         {
-            LOGE << "Failed to load default sector texture from " << _default_gfx_dir << '.';
-            throw logic_error("Failed to load default sector texture from " + _default_gfx_dir + '.');
+            LOGE << "Failed to load default sector texture from " << texture_filepath << '.';
+            throw runtime_error("Failed to load default sector texture from " + texture_filepath + '.');
         }
         else
-            LOGD << "Successfully loaded default sector texture from " << _default_gfx_dir << '.';
+            LOGD << "Successfully loaded default sector texture from " << texture_filepath << '.';
         
         return ret_val;
     }

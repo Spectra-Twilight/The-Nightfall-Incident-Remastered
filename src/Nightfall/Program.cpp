@@ -1,131 +1,35 @@
+////////////////////////////////////////////////////////////////////////////////
+/// Nightfall Includes
+////////////////////////////////////////////////////////////////////////////////
 #include <Nightfall/Program.hpp>
 #include <Nightfall/Program_Factory.hpp>
 
-using namespace std;
-using namespace nightfall;
-
-//======================================================================================================================================================
-
-const string Program::BaseGfxDir = "data/gfx/programs/base.png";
-sf::Texture Program::baseGfx;
-
-//======================================================================================================================================================
-
-Program::Program(const Factory* baseProgram): factory(baseProgram)
+namespace nightfall
 {
-    maxSize = factory->getMaxSize();
-    speed = factory->getMoveSpeed();
-
-//  TODO
-//    icon.setTexture(factory->getIcon());
-}
-
-//======================================================================================================================================================
-
-void Program::addNewestSector(GridSector* newSector)
-{
-    list<GridSector*>::iterator sectorIter;
-    bool foundMatch = false;
-    for (sectorIter = sectors.begin(); sectorIter != sectors.end() && !foundMatch; sectorIter++)
+    ////////////////////////////////////////////////////////////////////////////
+    Program::Program(const Factory* factory): 
+        _factory(factory),
+        _max_size(factory->getMaxSize()),
+        _speed(factory->getMoveSpeed())
     {
-        if (*sectorIter == newSector)
-        {
-            sectors.erase(sectorIter);
-            foundMatch = true;
-        }
     }
 
-    sectors.push_front(newSector);
-}
-
-//======================================================================================================================================================
-
-void Program::addOldestSector(GridSector* oldSector)
-{
-    list<GridSector*>::iterator sectorIter;
-    bool foundMatch = false;
-    for (sectorIter = sectors.begin(); sectorIter != sectors.end() && !foundMatch; sectorIter++)
+    ////////////////////////////////////////////////////////////////////////////
+    const Program::Factory* Program::factory() const
     {
-        if (*sectorIter == oldSector)
-        {
-            sectors.erase(sectorIter);
-            foundMatch = true;
-        }
+        return _factory;
     }
 
-    sectors.push_back(oldSector);
-}
+    ////////////////////////////////////////////////////////////////////////////
+    uint8_t Program::max_size() const
+    {
+        return _max_size;
+    }
 
-//======================================================================================================================================================
+    ////////////////////////////////////////////////////////////////////////////
+    uint8_t Program::speed() const
+    {
+        return _speed;
+    }
 
-const sf::Color& Program::getColor() const
-{
-    return factory->getColor();
-}
-
-//======================================================================================================================================================
-
-const list<Command*>& Program::getCommands() const
-{
-    return factory->getCommands();
-}
-
-//======================================================================================================================================================
-
-const string& Program::getDescription() const
-{
-    return factory->getDescription();
-}
-
-//======================================================================================================================================================
-
-const string& Program::getName() const
-{
-    return factory->getName();
-}
-
-//======================================================================================================================================================
-
-GridSector* Program::getNewestSector() const
-{
-    if (sectors.empty())
-        return nullptr;
-
-    return sectors.front();
-}
-
-//======================================================================================================================================================
-
-GridSector* Program::getOldestSector() const
-{
-    if (sectors.empty())
-        return nullptr;
-
-    return sectors.back();
-}
-
-//======================================================================================================================================================
-
-GridSector* Program::removeNewestSector()
-{
-    if (sectors.empty())
-        return nullptr;
-    
-    GridSector* sector = sectors.front();
-    sectors.pop_front();
-    return sector;
-}
-
-//======================================================================================================================================================
-
-GridSector* Program::removeOldestSector()
-{
-    if (sectors.empty())
-        return nullptr;
-    
-    GridSector* sector = sectors.back();
-    sectors.pop_back();
-    return sector;
-}
-
-//======================================================================================================================================================
+} // namespace nightfall
