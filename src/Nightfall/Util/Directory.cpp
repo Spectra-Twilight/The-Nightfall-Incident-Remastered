@@ -6,7 +6,7 @@
 namespace nightfall::util
 {
     ////////////////////////////////////////////////////////////////////////////
-    std::string Directory::commands()
+    std::string Directory::command_data()
     {
         return std::string(_data)
             += _commands;
@@ -40,7 +40,7 @@ namespace nightfall::util
     }
 
     ////////////////////////////////////////////////////////////////////////////
-    std::string Directory::programs()
+    std::string Directory::program_data()
     {
         return std::string(_data)
             += _programs;

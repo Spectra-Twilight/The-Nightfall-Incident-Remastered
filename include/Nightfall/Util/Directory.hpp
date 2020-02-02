@@ -21,7 +21,7 @@ namespace nightfall::util
         ///
         /// \return A string representation of the Commands data file filepath.
         ////////////////////////////////////////////////////////////////////////
-        static std::string commands();
+        static std::string command_data();
 
         ////////////////////////////////////////////////////////////////////////
         /// \brief Returns the filepath of the base Program texture.
@@ -49,7 +49,7 @@ namespace nightfall::util
         ///
         /// \return A string representation of the Programs data file filepath.
         ////////////////////////////////////////////////////////////////////////
-        static std::string programs();
+        static std::string program_data();
 
     private:
         static constexpr std::string_view _data = "data/"; ///< Base data directory. All non-code assets exist within this directory.
